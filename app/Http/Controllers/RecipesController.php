@@ -14,7 +14,7 @@ class RecipesController extends Controller
      */
     public function index()
     {
-        return Recipes::all();
+        return Recipes::find(2);
     }
 
     /**

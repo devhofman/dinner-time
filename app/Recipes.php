@@ -9,4 +9,8 @@ class Recipes extends Model
     protected $fillable = [
         'title', 'description', 'ingredients', 'prepare', 'time', 'category', 'comments'
     ];
+
+    public function comments() {
+        return $this->hasMany('App\Commentary');
+    }
 }

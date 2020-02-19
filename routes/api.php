@@ -17,6 +17,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/commentaries', 'CommentaryController@index');
+
 Route::get('/recipes', 'RecipesController@index');
 Route::post('/recipes', 'RecipesController@store');
 Route::patch('/recipes/{recipe}', 'RecipesController@update');
