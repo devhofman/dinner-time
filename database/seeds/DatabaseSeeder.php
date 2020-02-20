@@ -26,5 +26,8 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('secret'),
             'role' => 1 //1 - user
         ]);
+
+        factory(App\User::class, 5)->create();
+        factory(App\Recipe::class, 20)->create();
     }
 }

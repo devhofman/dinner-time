@@ -17,6 +17,16 @@ class UserController extends Controller
         ], 200);
     }
 
+    public function showRecipe($userId) {
+
+        $users = User::findOrFail($userId)->recipes;
+
+        return response()->json([
+            'status' => 'List of recipes of users',
+            'Recipe of user' => $users->toArray()
+        ], 200);
+    }
+
     public function show(Request $request, $id) {
         
         $users = User::find($id);

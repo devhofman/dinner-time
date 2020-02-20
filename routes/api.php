@@ -31,3 +31,5 @@ Route::prefix('user')->group(function() {
 
 Route::get('users', 'UserController@index');
 Route::get('users/{id}', 'UserController@show');
+Route::get('/users/{id}/recipes', 'UserController@showRecipe');
+

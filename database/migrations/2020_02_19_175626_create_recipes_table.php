@@ -20,7 +20,7 @@ class CreateRecipesTable extends Migration
             $table->string('about');
             $table->string('ingredients');
             $table->string('prepare');
-            $table->float('timeprepare');
+            $table->float('timeprepare')->default(2);
             $table->timestamps();
         });
     }
