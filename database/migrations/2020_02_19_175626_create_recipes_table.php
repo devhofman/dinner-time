@@ -14,13 +14,14 @@ class CreateRecipesTable extends Migration
     public function up()
     {
         Schema::create('recipes', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('title');
-            $table->string('user_id');
+            $table->integer('user_id')->unsigned();
             $table->string('about');
             $table->string('ingredients');
             $table->string('prepare');
             $table->float('timeprepare')->default(2);
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
