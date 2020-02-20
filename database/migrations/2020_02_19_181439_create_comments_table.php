@@ -18,6 +18,7 @@ class CreateCommentsTable extends Migration
             $table->string('title');
             $table->string('author');
             $table->string('content');
+            $table->string('recipe_id');
             $table->timestamps();
         });
     }
