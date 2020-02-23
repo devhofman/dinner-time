@@ -21,7 +21,6 @@
   </template>
   <template v-if="authenticated">
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <h4 class="navbar-brand">Jesteś zalogowany jako {{ user.name }}</h4>
     <ul class="navbar-nav ml-auto">
       <li class="nav-item active">
         <a class="nav-link" href="#"><router-link to="/">Przepisy kulinarne</router-link></a>

@@ -5,6 +5,7 @@ import Login from '../views/auth/Login.vue'
 import Register from '../views/auth/Register.vue'
 import User from '../views/user/Dashboard.vue'
 import Admin from '../views/admin/Dashboard.vue'
+import store from '../store'
 
 Vue.use(VueRouter)
 
@@ -45,8 +46,14 @@ const routes = [{
   path: '/user/dashboard',
   name: 'dashboard',
   component: User,
-  meta: {
-    auth: true
+  beforeEnter: (to, from, next) => {
+    if (!store.getters['auth/authenticated']) {
+      return next({
+        path: '/auth/login'
+      })
+    }
+
+    next()
   }
 },
 {
