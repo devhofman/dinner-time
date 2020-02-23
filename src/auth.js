@@ -54,6 +54,10 @@ export default {
         commit('SET_TOKEN', null)
         commit('SET_USER', null)
       })
+    },
+
+    async register (_, credentials) {
+      return axios.post('auth/register', credentials)
     }
   }
 }
