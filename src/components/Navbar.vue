@@ -4,7 +4,8 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+  <template v-if="!authenticated">
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item active">
         <a class="nav-link" href="#"><router-link to="/">O aplikacji</router-link></a>
@@ -17,11 +18,52 @@
       </li>
     </ul>
   </div>
+  </template>
+  <template v-if="authenticated">
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <h4 class="navbar-brand">Jesteś zalogowany jako {{ user.name }}</h4>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#"><router-link to="/">Przepisy kulinarne</router-link></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"><router-link to="/auth/login">Restauracje</router-link></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"><router-link to="/auth/register">Newsy</router-link></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" @click.prevent="signOut">Wyloguj się</a>
+      </li>
+    </ul>
+  </div>
+  </template>
 </nav>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
-  name: 'Navbar'
+  computed: {
+    ...mapGetters({
+      authenticated: 'auth/authenticated',
+      user: 'auth/user'
+    })
+  },
+
+  methods: {
+    ...mapActions({
+      signOutAction: 'auth/logout'
+    }),
+
+    signOut () {
+      this.signOutAction().then(() => {
+        this.$router.replace({
+          name: 'home'
+        })
+      })
+    }
+  }
 }
 </script>

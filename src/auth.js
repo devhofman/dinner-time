@@ -1,19 +1,59 @@
-import bearer from '@websanova/vue-auth/drivers/auth/bearer'
-import axios from '@websanova/vue-auth/drivers/http/axios.1.x'
-import router from '@websanova/vue-auth/drivers/router/vue-router.2.x'
-// Auth base configuration some of this options
-// can be override in method calls
-const config = {
-  auth: bearer,
-  http: axios,
-  router: router,
-  tokenDefaultName: 'laravel-vue-spa',
-  tokenStore: ['localStorage'],
-  rolesVar: 'role',
-  registerData: { url: 'auth/register', method: 'POST', redirect: '/login' },
-  loginData: { url: 'auth/login', method: 'POST', redirect: '', fetchUser: true },
-  logoutData: { url: 'auth/logout', method: 'POST', redirect: '/', makeRequest: true },
-  fetchData: { url: 'auth/user', method: 'GET', enabled: true },
-  refreshData: { url: 'auth/refresh', method: 'GET', enabled: true, interval: 30 }
+import axios from 'axios'
+
+export default {
+  namespaced: true,
+  state: {
+    token: null,
+    user: null
+  },
+
+  getters: {
+    authenticated (state) {
+      return state.token && state.user
+    },
+
+    user (state) {
+      return state.user
+    }
+  },
+
+  mutations: {
+    SET_TOKEN (state, token) {
+      state.token = token
+    },
+    SET_USER (state, user) {
+      state.user = user
+    }
+  },
+
+  actions: {
+    async login ({ dispatch }, credentials) {
+      const response = await axios.post('auth/login', credentials)
+      dispatch('attempt', response.data.token)
+    },
+
+    async attempt ({ commit }, token) {
+      commit('SET_TOKEN', token)
+
+      try {
+        const response = await axios.get('auth/me', {
+          headers: {
+            Authorization: 'Bearer ' + token
+          }
+        })
+
+        commit('SET_USER', response.data)
+      } catch (e) {
+        commit('SET_TOKEN', null)
+        commit('SET_USER', null)
+      }
+    },
+
+    async logout ({ commit }) {
+      return axios.post('auth/logout').then(() => {
+        commit('SET_TOKEN', null)
+        commit('SET_USER', null)
+      })
+    }
+  }
 }
-export default config
