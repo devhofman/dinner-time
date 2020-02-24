@@ -3,13 +3,13 @@
         <template v-if="!authenticated">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#"><router-link to="/">O aplikacji</router-link></a>
+        <router-link to="/"><span class="nav-link">O aplikacji</span></router-link>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#"><router-link to="/auth/login">Logowanie</router-link></a>
+        <router-link to="/auth/login"><span class="nav-link">Logowanie</span></router-link>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#"><router-link to="/auth/register">Rejestracja</router-link></a>
+        <router-link to="/auth/register"><span class="nav-link">Rejestracja</span></router-link>
       </li>
     </ul>
   </template>
@@ -31,6 +31,39 @@
   </template>
     </Slide>
 </template>
+
+<style scoped>
+@font-face {
+  font-family: 'Oswald-Bold';
+  src: url('../assets/font/Oswald-Bold.ttf');
+}
+
+@font-face {
+  font-family: 'Oswald-Regular';
+  src: url('../assets/font/Oswald-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Montserrat-Light';
+  src: url('../assets/font/Montserrat-Light.ttf');
+}
+
+@font-face {
+  font-family: 'Montserrat-Regular';
+  src: url('../assets/font/Montserrat-Regular.ttf');
+}
+
+.nav-link {
+  font-family: 'Oswald-Regular';
+  font-size: 1.2rem;
+  color: white;
+  text-transform: uppercase
+}
+
+.nav-link:hover {
+  text-decoration: none
+}
+</style>
 
 <script>
 import { Slide } from 'vue-burger-menu' // import the CSS transitions you wish to use, in this case we are using `Slide`
