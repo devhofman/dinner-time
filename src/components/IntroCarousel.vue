@@ -15,7 +15,7 @@
                 </div>
                 <div class="col-12 col-md-6">
                   <div class="container-fluid">
-                    <div class="row opis d-flex align-items-center">
+                    <div class="row opis slide d-flex align-items-center">
                       <div class="col-12 d-flex flex-column">
                         <h4 class="intro-title">Witaj w aplikacji dinner.time</h4>
                         <h3 class="opis-title">Odkrywaj nowe smaki</h3>
@@ -104,8 +104,15 @@
 </style>
 
 <script>
+import anime from 'animejs/lib/anime.es.js'
 
 export default {
   name: 'intro'
 }
+
+anime({
+  targets: '.easing-demo .el',
+  translateX: -250,
+  easing: 'easeInOutExpo'
+})
 </script>

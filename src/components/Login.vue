@@ -14,13 +14,15 @@
                     </div>
                     <div class="row opis d-flex align-items-center mt-5">
                       <div class="col-12 ">
-                        <div class="card">
+                        <form @submit.prevent="submit">
+                          <div class="card">
   <ul class="list-group list-group-flush">
     <li class="list-group-item"><input type="email" placeholder="Adres email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" v-model="form.email"></li>
     <li class="list-group-item"><input type="password" placeholder="Hasło" class="form-control" id="exampleInputPassword1" v-model="form.password"></li>
     <li class="list-group-item"><button type="submit" class="btn btn_intro">Zaloguj się</button></li>
   </ul>
 </div>
+                        </form>
                       </div>
                     </div>
                   </div>

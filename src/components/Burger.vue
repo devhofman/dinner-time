@@ -15,7 +15,10 @@
   </template>
       <template v-if="authenticated">
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item active">
+      <li class="nav-item">
+        <h5 class="nav-link">{{ user.name }}</h5>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" href="#"><router-link to="/">Przepisy kulinarne</router-link></a>
       </li>
       <li class="nav-item">
