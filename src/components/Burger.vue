@@ -29,6 +29,7 @@
       </li>
     </ul>
   </template>
+  <Footer class="mt-5 w-100 text-center"/>
     </Slide>
 </template>
 
@@ -68,10 +69,12 @@
 <script>
 import { Slide } from 'vue-burger-menu' // import the CSS transitions you wish to use, in this case we are using `Slide`
 import { mapGetters, mapActions } from 'vuex'
+import Footer from './Footer'
 
 export default {
   components: {
-    Slide // Register your component
+    Slide,
+    Footer
   },
 
   computed: {

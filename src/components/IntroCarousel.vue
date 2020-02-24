@@ -4,11 +4,20 @@
           <div class="col-12">
             <div class="container">
               <div class="row">
-                <div class="col-12 col-md-6"></div>
                 <div class="col-12 col-md-6">
                   <div class="container-fluid">
-                    <div class="row opis opis d-flex align-items-center">
+                    <div class="row d-flex align-items-center">
+                      <div class="col-12 d-flex flex-column opis">
+                        <img src="../assets/img/intro_pic.jpg">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <div class="container-fluid">
+                    <div class="row opis d-flex align-items-center">
                       <div class="col-12 d-flex flex-column">
+                        <h4 class="intro-title">Witaj w aplikacji dinner.time</h4>
                         <h3 class="opis-title">Odkrywaj nowe smaki</h3>
                         <span class="opis-content pt-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel facilisis enim. Donec ac imperdiet nisi, vehicula eleifend sem. Nullam bibendum nulla quis enim finibus, eget malesuada tellus auctor. Nullam eu metus ut sapien interdum iaculis in eu ipsum.</span>
                         <button type="submit" class="btn mt-5 btn_intro"><router-link to="/auth/register" class="link">Zarejestruj się</router-link></button>
@@ -49,9 +58,23 @@
   height: 100vh;
 }
 
+.opis img {
+  height: 100vh;
+}
+
+.pic {
+  width: 100%
+}
+
 .opis-title {
   font-family: 'Oswald-Bold';
   font-size: 4rem;
+  text-transform: uppercase
+}
+
+.intro-title {
+  font-family: 'Oswald-Regular';
+  font-size: 1.2rem;
   text-transform: uppercase
 }
 

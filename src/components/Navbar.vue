@@ -42,8 +42,12 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import Footer from './Footer'
 
 export default {
+  components: {
+    Footer
+  },
   computed: {
     ...mapGetters({
       authenticated: 'auth/authenticated',
