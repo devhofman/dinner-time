@@ -2,13 +2,13 @@
 
 namespace App;
 
+use App\Comment;
 use Illuminate\Database\Eloquent\Model;
 
 class Recipe extends Model
 {
-    public function user()
+    public function comments()
     {
-        $posts = User::findOrFail($userId)->posts;
-        return $posts;
+        return $this->hasMany(Comment::class);
     }
 }

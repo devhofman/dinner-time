@@ -27,10 +27,14 @@ Route::prefix('auth')->group(function() {
 
 Route::prefix('user')->group(function() {
     Route::get('/recipes', 'RecipeController@index');
+    Route::get('/recipes/{id}', 'RecipeController@showOne');
 });
 
 
 Route::get('users', 'UserController@index');
 Route::get('users/{id}', 'UserController@show');
 Route::get('/users/{id}/recipes', 'UserController@showRecipe');
+
+Route::get('comments', 'CommentController@index');
+Route::get('comments/{id}', 'CommentController@showOne');
 

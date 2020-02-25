@@ -16,12 +16,12 @@ class CreateRecipesTable extends Migration
         Schema::create('recipes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->integer('user_id')->unsigned();
             $table->string('about');
             $table->string('ingredients');
             $table->string('prepare');
             $table->float('timeprepare')->default(2);
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('comment_id')->references('id')->on('comments');
             $table->timestamps();
         });
     }

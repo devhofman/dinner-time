@@ -14,7 +14,12 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
+        return Comment::all();
+    }
+
+    public function showOne($id) {
+        $comment = Comment::find($id);
+        return $comment;
     }
 
     /**

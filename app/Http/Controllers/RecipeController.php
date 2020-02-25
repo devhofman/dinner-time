@@ -17,6 +17,14 @@ class RecipeController extends Controller
         return Recipe::all();
     }
 
+    public function showOne($id) 
+    {
+        $recipe = Recipe::find($id);
+        $comments = $recipe->comments;
+
+        return $recipe;
+    }
+
     /**
      * Show the form for creating a new resource.
      *
