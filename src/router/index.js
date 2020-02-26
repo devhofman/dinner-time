@@ -29,18 +29,12 @@ const routes = [{
 {
   path: '/auth/login',
   name: 'Login',
-  component: Login,
-  meta: {
-    auth: false
-  }
+  component: Login
 },
 {
   path: '/auth/register',
   name: 'Register',
-  component: Register,
-  meta: {
-    auth: false
-  }
+  component: Register
 },
 {
   path: '/user/dashboard',

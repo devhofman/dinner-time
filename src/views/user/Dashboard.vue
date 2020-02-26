@@ -1,18 +1,19 @@
 <template>
     <div class="container">
-      <h3>Jesteś zalogowany jako {{ user.name }}</h3>
-    <h4>Twoje przepisy</h4>
-    <UserRecipe/>
+      <div class="row">
+        <div class="col-12">
+          książka, restauracje, newsy
+        </div>
+      </div>
     </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import UserRecipe from '../../components/UserRecipe'
 
 export default {
   components: {
-    UserRecipe
+    //
   },
   computed: {
     ...mapGetters({
@@ -21,3 +22,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.btn_square {
+  width: 12rem; height: 12rem;
+  border: 1px solid black;
+}
+</style>

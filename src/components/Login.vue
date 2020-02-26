@@ -7,7 +7,7 @@
                 <div class="col-12 col-md-12">
                   <div class="container">
                     <div class="row opis d-flex align-items-center">
-                      <div class="col-12 d-flex flex-column ">
+                      <div class="col-12 d-flex flex-column text-center mt-auto">
                         <h3 class="opis-title">Miło Cię znowu widzieć!</h3>
                         <span class="opis-content pt-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel facilisis enim. Donec ac imperdiet nisi, vehicula eleifend sem. Nullam bibendum nulla quis enim finibus, eget malesuada tellus auctor. Nullam eu metus ut sapien interdum iaculis in eu ipsum.</span>
                       </div>
@@ -15,7 +15,7 @@
                     <div class="row opis d-flex align-items-center mt-5">
                       <div class="col-12 ">
                         <form @submit.prevent="submit">
-                          <div class="card">
+                          <div class="card ml-auto mr-auto" style="width: 18rem">
   <ul class="list-group list-group-flush">
     <li class="list-group-item"><input type="email" placeholder="Adres email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" v-model="form.email"></li>
     <li class="list-group-item"><input type="password" placeholder="Hasło" class="form-control" id="exampleInputPassword1" v-model="form.password"></li>
@@ -71,7 +71,7 @@
 }
 
 .btn_intro {
-  width: 30%;
+  width: 100%;
   background-color: #fb9f8b;
   border-radius: 0;
   font-family: 'Oswald-Regular';
