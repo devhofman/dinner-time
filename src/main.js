@@ -7,17 +7,21 @@ import axios from 'axios'
 import store from './store'
 import anime from 'animejs/lib/anime.es.js'
 
-window.Vue = Vue
+require('./subscriber')
 
-Vue.config.productionTip = false
+window.Vue = Vue
 axios.defaults.baseURL = 'http://localhost:8000/api'
 
-new Vue({
-  router,
-  Bootstrap,
-  StyleBootstrap,
-  axios,
-  store,
-  anime,
-  render: h => h(App)
-}).$mount('#app')
+Vue.config.productionTip = false
+
+store.dispatch('auth/attempt', localStorage.getItem('token')).then(() => {
+  new Vue({
+    router,
+    Bootstrap,
+    StyleBootstrap,
+    axios,
+    store,
+    anime,
+    render: h => h(App)
+  }).$mount('#app')
+})

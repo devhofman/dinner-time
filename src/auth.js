@@ -32,15 +32,17 @@ export default {
       dispatch('attempt', response.data.token)
     },
 
-    async attempt ({ commit }, token) {
-      commit('SET_TOKEN', token)
+    async attempt ({ commit, state }, token) {
+      if (token) {
+        commit('SET_TOKEN', token)
+      }
+
+      if (!state.token) {
+        return
+      }
 
       try {
-        const response = await axios.get('auth/me', {
-          headers: {
-            Authorization: 'Bearer ' + token
-          }
-        })
+        const response = await axios.get('auth/me')
 
         commit('SET_USER', response.data)
       } catch (e) {
