@@ -17,23 +17,14 @@ class UserController extends Controller
         ], 200);
     }
 
-    public function showRecipe($userId) {
+    public function showRecipeOf() {
 
-        $users = User::findOrFail($userId)->recipes;
+        $recipeOf = User::find(auth()->user()->id)->recipes()->get();
 
         return response()->json([
-            'status' => 'List of recipes of users',
-            'Recipe of user' => $users->toArray()
+            'status' => 'Recipes of user',
+            'Recipes' => $recipeOf->toArray()
         ], 200);
     }
 
-    public function show(Request $request, $id) {
-        
-        $users = User::find($id);
-
-        return response()->json([
-            'status' => 'List of users',
-            'users' => $users->toArray()
-        ], 200);
-    }
 }

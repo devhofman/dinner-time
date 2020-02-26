@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Recipe;
 use Illuminate\Http\Request;
 
@@ -14,15 +15,7 @@ class RecipeController extends Controller
      */
     public function index()
     {
-        return Recipe::all();
-    }
-
-    public function showOne($id) 
-    {
-        $recipe = Recipe::find($id);
-        $comments = $recipe->comments;
-
-        return $recipe;
+        return Recipe::find(4);
     }
 
     /**

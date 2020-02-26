@@ -11,7 +11,9 @@ $factory->define(Recipe::class, function (Faker $faker) {
         'title' => $faker->sentence,
         'user_id' => App\User::all()->random()->id,
         'about' => $faker->sentence,
+        'category' => $faker->sentence,
         'ingredients' => $faker->sentence,
-        'prepare' => $faker->sentence
+        'how_prepare' => $faker->sentence,
+        'time_prepare' => $faker->randomDigit
     ];
 });
