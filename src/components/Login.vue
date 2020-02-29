@@ -121,7 +121,7 @@ export default {
     async submit () {
       this.login(this.form).then(() => {
         this.$router.replace({
-          name: 'dashboard'
+          path: '/user/dashboard'
         })
       })
     }

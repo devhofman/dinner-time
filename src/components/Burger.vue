@@ -15,17 +15,23 @@
   </template>
       <template v-if="authenticated">
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <h5 class="nav-link">{{ user.name }}</h5>
+      <li class="nav-item pb-5">
+        <a class="nav-link" href="#"><router-link to="/user/dashboard">Start</router-link></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#"><router-link to="/">Przepisy kulinarne</router-link></a>
+        <a class="nav-link" href="#"><router-link to="/user/dashboard">Przepisy kulinarne</router-link></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#"><router-link to="/auth/login">Restauracje</router-link></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#"><router-link to="/auth/register">Newsy</router-link></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"><router-link to="/auth/register">Newsy</router-link></a>
+      </li>
+       <li class="nav-item mt-5">
+        <a class="nav-link" href="#"><router-link to="/user/dashboard">{{ user.name }}</router-link></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#" @click.prevent="signOut">Wyloguj się</a>
@@ -95,7 +101,7 @@ export default {
     signOut () {
       this.signOutAction().then(() => {
         this.$router.replace({
-          name: 'home'
+          path: '/'
         })
       })
     }

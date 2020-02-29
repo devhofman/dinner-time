@@ -4,7 +4,9 @@ import Home from '../views/Home.vue'
 import Login from '../views/auth/Login.vue'
 import Register from '../views/auth/Register.vue'
 import User from '../views/user/Dashboard.vue'
-import Admin from '../views/admin/Dashboard.vue'
+// import Admin from '../views/admin/Dashboard.vue'
+import RecipePage from '../views/user/RecipePage.vue'
+import AddRecipe from '../views/user/AddRecipe.vue'
 import store from '../store'
 
 Vue.use(VueRouter)
@@ -51,17 +53,31 @@ const routes = [{
   }
 },
 {
-  path: '/admin/dashboard',
-  name: 'admin.dashboard',
-  component: Admin,
-  meta: {
-    auth: {
-      roles: 2,
-      redirect: {
-        name: 'login'
-      },
-      forbiddenRedirect: '/403'
+  path: '/user/recipes',
+  name: 'recipebook',
+  component: RecipePage,
+  beforeEnter: (to, from, next) => {
+    if (!store.getters['auth/authenticated']) {
+      return next({
+        path: '/auth/login'
+      })
     }
+
+    next()
+  }
+},
+{
+  path: '/user/recipes/add',
+  name: 'addrecipe_page',
+  component: AddRecipe,
+  beforeEnter: (to, from, next) => {
+    if (!store.getters['auth/authenticated']) {
+      return next({
+        path: '/auth/login'
+      })
+    }
+
+    next()
   }
 }
 ]

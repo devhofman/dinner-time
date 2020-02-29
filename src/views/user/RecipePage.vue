@@ -6,11 +6,24 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-12 col-lg-6">
+          <div class="col-12 col-lg-6">
           <div class="container">
             <div class="row">
               <div class="col-12 pt-5 pb-5">
-                sd
+                <router-link to="/user/recipes/add">
+                    <button type="button" class="btn d-flex flex-column text-left mt-5 btn_dashboard">
+                  <h5 class="btn_dashboard-title">Dodaj przepis</h5>
+                  <span class="btn_dashboard-desc">Nullam leo risus, ullamcorper vel quam vel, dictum consequat enim. Donec aliquam ac erat in euismod. Phasellus sed justo quis lorem tempor blandit. </span>
+                </button>
+                </router-link>
+                <button type="button" class="btn d-flex flex-column text-left mt-5 btn_dashboard">
+                  <h5 class="btn_dashboard-title">Twoje przepisy</h5>
+                  <span class="btn_dashboard-desc">Nullam leo risus, ullamcorper vel quam vel, dictum consequat enim. Donec aliquam ac erat in euismod. Phasellus sed justo quis lorem tempor blandit. </span>
+                </button>
+                <button type="button" class="btn d-flex flex-column text-left mt-5 btn_dashboard">
+                  <h5 class="btn_dashboard-title">Popularne</h5>
+                  <span class="btn_dashboard-desc">Nullam leo risus, ullamcorper vel quam vel, dictum consequat enim. Donec aliquam ac erat in euismod. Phasellus sed justo quis lorem tempor blandit. </span>
+                </button>
               </div>
             </div>
           </div>
@@ -19,20 +32,7 @@
           <div class="container">
             <div class="row">
               <div class="col-12 pt-5 pb-5">
-                <router-link to="/user/recipes">
-                  <button type="button" class="btn d-flex flex-column text-left mt-5 btn_dashboard">
-                  <h5 class="btn_dashboard-title">Twój notes kulinarny</h5>
-                  <span class="btn_dashboard-desc">Nullam leo risus, ullamcorper vel quam vel, dictum consequat enim. Donec aliquam ac erat in euismod. Phasellus sed justo quis lorem tempor blandit. </span>
-                </button>
-                </router-link>
-                <button type="button" class="btn d-flex flex-column text-left mt-5 btn_dashboard">
-                  <h5 class="btn_dashboard-title">Restauracje w pobliżu</h5>
-                  <span class="btn_dashboard-desc">Nullam leo risus, ullamcorper vel quam vel, dictum consequat enim. Donec aliquam ac erat in euismod. Phasellus sed justo quis lorem tempor blandit. </span>
-                </button>
-                <button type="button" class="btn d-flex flex-column text-left mt-5 btn_dashboard">
-                  <h5 class="btn_dashboard-title">Wiadomości o zdrowiu</h5>
-                  <span class="btn_dashboard-desc">Nullam leo risus, ullamcorper vel quam vel, dictum consequat enim. Donec aliquam ac erat in euismod. Phasellus sed justo quis lorem tempor blandit. </span>
-                </button>
+                Tu będą najnowsze przepisy
               </div>
             </div>
           </div>
