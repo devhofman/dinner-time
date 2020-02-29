@@ -14,4 +14,10 @@ class Comment extends Model
     ];
 
     protected $hidden = 'updated_at';
+
+    protected $table = 'comments';
+
+    public function users() {
+        return $this->belongsTo('App\Comment', 'comment_id');
+    }
 }

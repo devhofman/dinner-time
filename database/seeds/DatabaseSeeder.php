@@ -29,5 +29,6 @@ class DatabaseSeeder extends Seeder
 
         factory(App\User::class, 5)->create();
         factory(App\Recipe::class, 20)->create();
+        factory(App\Comment::class, 10)->create();
     }
 }

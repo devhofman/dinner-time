@@ -14,7 +14,12 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
+        $comments = Comment::all();
+
+        return response()->json([
+            'status' => 'List of comments',
+            'comments' => $comments->toArray()
+        ], 200);
     }
 
     /**

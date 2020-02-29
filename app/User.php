@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use App\Recipe;
+use App\Comment;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -50,6 +51,10 @@ class User extends Authenticatable implements JWTSubject
 
     public function recipes() {
         return $this->hasMany('App\Recipe', 'user_id');
+    }
+
+    public function comments() {
+        return $this->hasMany('App\Comment', 'user_id');
     }
     
 }
