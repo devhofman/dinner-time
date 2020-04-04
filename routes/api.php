@@ -13,31 +13,51 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::prefix('auth')->group(function() {
-    Route::group(['middleware' => 'auth:api'],
-    function() {
-        Route::post('/register', 'AuthController@register');
-        Route::post('/login', 'AuthController@login');
-        Route::get('/me', 'AuthController@me');
-        Route::post('/logout', 'AuthController@logout');
-    });
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'auth'
+
+], function ($router) {
+
+    Route::post('/new/reader', 'RegisterController');
+    Route::post('/new/chef', 'RegisterChefController');
+    Route::post('/login', 'LoginController');
+    Route::post('/logout', 'LogoutController');
+
 });
 
-Route::prefix('user')->group(function() {
-    Route::get('/recipes', 'RecipeController@index');
+Route::group([
+
+    'middleware' => 'api',
+
+], function ($router) {
+
+    Route::post('/recipes/store', 'RecipeController@store');
+
 });
+
+Route::group(['middleware' => ['role:admin|chef|reader', 'api']], function () {
+    Route::get('/recipes', 'RecipeController@index');
+    Route::post('/comments/new', 'CommentController@store');
+});
+
+Route::group(['middleware' => ['role:chef', 'api']], function () {
+    Route::post('/recipes/store', 'RecipeController@store');
+});
+
 
 // Route::get('/users/{id}/recipes', 'UserController@showRecipe');
 
-//RECIPES
-Route::get('/recipes/{id}', 'RecipeController@showRecipeOf');
-Route::post('/recipes/store', 'RecipeController@store');
+// //RECIPES
+// Route::get('/recipes', 'RecipeController@index');
+// Route::get('/recipes/{id}', 'RecipeController@showRecipeOf');
+// Route::post('/recipes/store', 'RecipeController@store');
 
 
-//COMMENTS
-Route::get('/comments', 'CommentController@index');
+// //COMMENTS
+// Route::get('/comments', 'CommentController@index');
 
 //USERS
 Route::get('/users', 'UserController@index');
-
-
+Route::post('/users/create', 'UserController@store');

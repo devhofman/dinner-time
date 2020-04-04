@@ -6,12 +6,16 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use Spatie\Permission\Traits\HasRoles;
 use App\Recipe;
 use App\Comment;
 
 class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
+    use HasRoles;
+
+    protected $guard_name = 'api';
 
     /**
      * The attributes that are mass assignable.
@@ -50,7 +54,7 @@ class User extends Authenticatable implements JWTSubject
     }
 
     public function recipes() {
-        return $this->hasMany('App\Recipe', 'user_id');
+        return $this->hasMany('App\Recipe');
     }
 
     public function comments() {

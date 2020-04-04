@@ -2,37 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use App\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use App\User;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Hash;
-use DB;
 
-class UserController extends Controller
+class RegisterChefController extends Controller
 {
+    public function __invoke(Request $request) {
 
-    public function __construct() 
-    {
-        $this->middleware(['role:admin']);
-    }
-    
-    public function index() 
-    {    
-        $users = User::findOrFail(8)->recipes;
-        return response()->json($users, 200);
-    }
-
-    public function store(Request $request)
-    {
         $v = Validator::make($request->all(), [
             'name' => 'required|min:3',
             'surname' => 'required|min:3',
             'email' => 'required|email|unique:users',
-            'roles' => 'required'
+            'password'  => 'required|min:10|confirmed',
         ]);
 
         if ($v->fails())
@@ -47,11 +31,10 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->surname = $request->surname;
         $user->email = $request->email;
-        $user->password = bcrypt((str_random(8)));
-        $user->assignRole($request->roles);
+        $user->password = bcrypt($request->password);
+        $user->assignRole('chef');
         $user->save();
 
         return response()->json($user, 200);
     }
-
 }

@@ -12,6 +12,11 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct() 
+    {
+        $this->middleware(['auth:api']);
+    }
+
     public function index()
     {
         $comments = Comment::all();
@@ -22,15 +27,6 @@ class CommentController extends Controller
         ], 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -40,29 +36,18 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $comment = $request->validate([
+            'title' => 'string|required',
+            'content' => 'string|required'
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Comment  $comment
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Comment $comment)
-    {
-        //
-    }
+        $comment = new Comment();
+        $comment->title = $request->title;
+        $comment->user_id = auth()->user()->id;
+        $comment->content = $request->content;
+        $comment->save();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Comment  $comment
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Comment $comment)
-    {
-        //
+        return response()->json($comment, 200);
     }
 
     /**

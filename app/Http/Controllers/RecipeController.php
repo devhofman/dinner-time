@@ -13,17 +13,19 @@ class RecipeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function __construct() 
     {
-        return Recipe::all();
+        $this->middleware(['auth:api']);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function index()
+    {
+        $recipe = Recipe::find(1)->user()->get();
+
+        return response()->json($recipe, 200);
+    }
+
+    public function getRecipe($id)
     {
         //
     }
@@ -38,7 +40,6 @@ class RecipeController extends Controller
     {
         $recipe = $request->validate([
             'title' => 'string|max:30|required',
-            'user_id' => 'required',
             'about' => 'string|required',
             'category' => 'string|required',
             'ingredients' => 'string|required',
@@ -48,7 +49,7 @@ class RecipeController extends Controller
 
         $recipe = new Recipe;
         $recipe->title = $request->title;
-        $recipe->user_id = $request->user_id;
+        $recipe->user_id = auth()->user()->id;
         $recipe->about = $request->about;
         $recipe->category = $request->category;
         $recipe->ingredients = $request->ingredients;
@@ -56,44 +57,8 @@ class RecipeController extends Controller
         $recipe->time_prepare = $request->time_prepare;
         $recipe->save();
 
-        return response()->json([
-            'status' => 'Recipe added!'
-        ], 200);
+        return response()->json($recipe, 200);
     }
-
-    public function showRecipeOf() {
-
-        $recipeOf = User::find(auth()->user()->id)->recipes()->get();
-
-        return response()->json([
-            'status' => 'Recipes of user',
-            'Recipes' => $recipeOf->toArray()
-        ], 200);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Recipe  $recipe
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Recipe $recipe)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Recipe  $recipe
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Recipe $recipe)
-    {
-        //
-    }
-
     /**
      * Remove the specified resource from storage.
      *

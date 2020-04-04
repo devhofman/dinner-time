@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Recipe extends Model
 {
+    protected $table = 'recipes';
     protected $fillable = [
         'title',
         'user_id',
@@ -22,7 +23,7 @@ class Recipe extends Model
         'updated_at'
     ];
 
-    public function users() {
-        return $this->belongsTo('App\User', 'recipe_id');
+    public function user() {
+        return $this->belongsTo(User::class);
     }
 }
