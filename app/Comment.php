@@ -2,22 +2,30 @@
 
 namespace App;
 
+use App\User;
+use App\Recipe;
 use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
+    protected $table = 'comments';
     protected $fillable = [
         'title',
-        'user_id',
         'content',
-        'created_at'
+        'user_id', 
+        'recipe_id',
+        'created_at',
     ];
 
-    protected $hidden = 'updated_at';
+    protected $hidden = [   
+        'updated_at'
+    ];
 
-    protected $table = 'comments';
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 
-    public function users() {
-        return $this->belongsTo('App\Comment', 'comment_id');
+    public function recipes() {
+        return $this->belongsTo(Recipe::class);
     }
 }

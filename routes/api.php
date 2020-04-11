@@ -39,11 +39,21 @@ Route::group([
 
 Route::group(['middleware' => ['role:admin|chef|reader', 'api']], function () {
     Route::get('/recipes', 'RecipeController@index');
-    Route::post('/comments/new', 'CommentController@store');
+    Route::post('/comment/new/{comment}', 'CommentController@store');
+});
+
+Route::group(['middleware' => ['role:admin', 'api']], function () {
+    Route::get('/users', 'UserController@index');
+    Route::post('/users/create', 'UserController@store');
+    Route::get('/comments', 'CommentController@index');
 });
 
 Route::group(['middleware' => ['role:chef', 'api']], function () {
     Route::post('/recipes/store', 'RecipeController@store');
+});
+
+Route::group(['middleware' => ['role:admin|chef', 'api']], function () {
+    Route::delete('/recipes/delete/{recipe}', 'RecipeController@destroy');
 });
 
 
@@ -56,8 +66,12 @@ Route::group(['middleware' => ['role:chef', 'api']], function () {
 
 
 // //COMMENTS
-// Route::get('/comments', 'CommentController@index');
+// 
 
 //USERS
-Route::get('/users', 'UserController@index');
-Route::post('/users/create', 'UserController@store');
+
+
+Route::get('/category', 'CategoryController@index');
+Route::post('/category/add', 'CategoryController@store');
+
+

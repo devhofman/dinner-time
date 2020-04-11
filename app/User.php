@@ -10,7 +10,7 @@ use Spatie\Permission\Traits\HasRoles;
 use App\Recipe;
 use App\Comment;
 
-class User extends Authenticatable implements JWTSubject
+class User extends Authenticatable implements JWTSubject, MustVerifyEmail
 {
     use Notifiable;
     use HasRoles;

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
+use App\Recipe;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -12,21 +13,12 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct() 
-    {
-        $this->middleware(['auth:api']);
-    }
-
     public function index()
     {
-        $comments = Comment::all();
+        $comment = Comment::with('recipes')->get();
 
-        return response()->json([
-            'status' => 'List of comments',
-            'comments' => $comments->toArray()
-        ], 200);
+        return response($comment, 200);
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -34,20 +26,22 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Recipe $recipe)
     {
-        $comment = $request->validate([
-            'title' => 'string|required',
-            'content' => 'string|required'
+        $recipe = Recipe::find($recipe);
+
+        $data = $request->validate([
+            'title' => 'required',
+            'content' => 'required'
         ]);
 
         $comment = new Comment();
         $comment->title = $request->title;
-        $comment->user_id = auth()->user()->id;
         $comment->content = $request->content;
-        $comment->save();
 
-        return response()->json($comment, 200);
+        $recipe->comments()->save($comment);
+
+        return response($comment, 200);
     }
 
     /**

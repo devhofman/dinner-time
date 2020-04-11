@@ -3,6 +3,8 @@
 namespace App;
 
 use App\User;
+use App\Category;
+use App\Comment;
 use Illuminate\Database\Eloquent\Model;
 
 class Recipe extends Model
@@ -11,6 +13,7 @@ class Recipe extends Model
     protected $fillable = [
         'title',
         'user_id',
+        'recipe_id',
         'about',
         'category',
         'ingredients',
@@ -25,5 +28,13 @@ class Recipe extends Model
 
     public function user() {
         return $this->belongsTo(User::class);
+    }
+
+    public function category() {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function comments() {
+        return $this->hasMany(Comment::class);
     }
 }

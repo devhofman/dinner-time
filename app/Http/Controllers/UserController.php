@@ -17,12 +17,14 @@ class UserController extends Controller
 
     public function __construct() 
     {
-        $this->middleware(['role:admin']);
+        $this->middleware(['role:admin|auth:api']);
     }
     
     public function index() 
     {    
-        $users = User::findOrFail(8)->recipes;
+        $users = User::with([
+            'recipes', 'comments'
+        ])->get();
         return response()->json($users, 200);
     }
 

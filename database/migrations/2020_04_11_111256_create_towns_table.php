@@ -15,6 +15,11 @@ class CreateTownsTable extends Migration
     {
         Schema::create('towns', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name');
+            $table->string('description');
+            $table->float('longitude');
+            $table->float('latitude');
+            $table->float('zoom');
             $table->timestamps();
         });
     }

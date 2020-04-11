@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Recipe;
+use App\Category;
 use Illuminate\Http\Request;
 
 class RecipeController extends Controller
@@ -20,14 +21,16 @@ class RecipeController extends Controller
 
     public function index()
     {
-        $recipe = Recipe::find(1)->user()->get();
+        $recipes = Recipe::with('comments')->get();
 
-        return response()->json($recipe, 200);
+        return response()->json($recipes, 200);
     }
 
-    public function getRecipe($id)
+    public function getRecipe(Recipe $recipe, $id)
     {
-        //
+        $recipe = Recipe::find($id)->user()->get();
+
+        return response()->json($recipe, 200);
     }
 
     /**
@@ -67,6 +70,8 @@ class RecipeController extends Controller
      */
     public function destroy(Recipe $recipe)
     {
-        //
+        $recipe->delete();
+
+        return response('Recipe has been deleted', 200);
     }
 }
