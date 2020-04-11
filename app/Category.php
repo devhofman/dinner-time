@@ -18,4 +18,8 @@ class Category extends Model
     public function recipes() {
         return $this->hasMany('App\Recipe', 'category', 'id');
     }
+
+    public function restaurants() {
+        return $this->hasMany('App\Resturant', 'category', 'id');
+    }
 }

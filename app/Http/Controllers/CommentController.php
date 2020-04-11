@@ -28,8 +28,6 @@ class CommentController extends Controller
      */
     public function store(Request $request, Recipe $recipe)
     {
-        $recipe = Recipe::find($recipe);
-
         $data = $request->validate([
             'title' => 'required',
             'content' => 'required'
@@ -38,8 +36,10 @@ class CommentController extends Controller
         $comment = new Comment();
         $comment->title = $request->title;
         $comment->content = $request->content;
+        $comment->user_id = auth()->user()->id;
+        $comment->recipe_id = $recipe->id;
+        $comment->save();
 
-        $recipe->comments()->save($comment);
 
         return response($comment, 200);
     }

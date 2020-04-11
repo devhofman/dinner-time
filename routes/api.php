@@ -39,7 +39,7 @@ Route::group([
 
 Route::group(['middleware' => ['role:admin|chef|reader', 'api']], function () {
     Route::get('/recipes', 'RecipeController@index');
-    Route::post('/comment/new/{comment}', 'CommentController@store');
+    Route::post('/comment/new/{recipe}', 'CommentController@store');
 });
 
 Route::group(['middleware' => ['role:admin', 'api']], function () {
@@ -48,7 +48,7 @@ Route::group(['middleware' => ['role:admin', 'api']], function () {
     Route::get('/comments', 'CommentController@index');
 });
 
-Route::group(['middleware' => ['role:chef', 'api']], function () {
+Route::group(['middleware' => ['role:admin', 'api']], function () {
     Route::post('/recipes/store', 'RecipeController@store');
 });
 

@@ -21,7 +21,9 @@ class RecipeController extends Controller
 
     public function index()
     {
-        $recipes = Recipe::with('comments')->get();
+        $recipes = Recipe::with([
+            'comments', 'category'
+        ])->get();
 
         return response()->json($recipes, 200);
     }

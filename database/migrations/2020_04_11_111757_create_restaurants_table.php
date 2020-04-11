@@ -21,6 +21,7 @@ class CreateRestaurantsTable extends Migration
             $table->float('latitude');
             $table->float('zoom');
             $table->integer('town_id');
+            $table->integer('category');
             $table->timestamps();
         });
     }
