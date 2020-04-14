@@ -1,28 +1,68 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Navbar />
+    <router-view/>
+    <Footer />
   </div>
 </template>
 
+<style>
+@font-face {
+  font-family: Montserrat-Light;
+  src: url('./assets/font/Montserrat-Light.ttf');
+}
+
+@font-face {
+  font-family: Montserrat-Regular;
+  src: url('./assets/font/Montserrat-Regular.ttf');
+}
+
+@font-face {
+  font-family: Oswald-Bold;
+  src: url('./assets/font/Oswald-Bold.ttf');
+}
+
+@font-face {
+  font-family: Oswald-Regular;
+  src: url('./assets/font/Oswald-Regular.ttf');
+}
+
+.oswald-bold {
+  font-family: Oswald-Bold;
+}
+
+.oswald-reg {
+  font-family: Oswald-Regular;
+}
+
+.mont-light {
+  font-family: Montserrat-Light;
+}
+
+.mont-reg {
+  font-family: Montserrat-Regular;
+}
+
+#app {
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+.color-main {
+  background-color: #EC6957;
+}
+</style>
+
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// @ is an alias to /src
+import Navbar from '@/components/Navbar.vue'
+import Footer from '@/components/Footer.vue'
 
 export default {
-  name: 'App',
+  name: 'Home',
   components: {
-    HelloWorld
+    Navbar,
+    Footer
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

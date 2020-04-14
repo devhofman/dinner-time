@@ -17,8 +17,10 @@
     <!-- /.row -->
 
     <!-- Call to Action Well -->
-    <div class="card text-white bg-secondary my-5 text-center">
-      <Map />
+    <div class="card text-white bg-secondary my-5 py-4 text-center">
+      <div class="card-body">
+        <p class="text-white m-0">This call to action card is a great place to showcase some important information or display a clever tagline!</p>
+      </div>
     </div>
 
     <!-- Content Row -->
@@ -67,13 +69,8 @@
 </template>
 
 <script>
-import Map from '../components/Map'
-
 export default {
-  name: 'homepage',
-  components: {
-    Map
-  }
+  name: 'panel'
 }
 </script>
 
