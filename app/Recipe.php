@@ -5,6 +5,7 @@ namespace App;
 use App\User;
 use App\Category;
 use App\Comment;
+use App\Photo;
 use Illuminate\Database\Eloquent\Model;
 
 class Recipe extends Model
@@ -36,5 +37,9 @@ class Recipe extends Model
 
     public function comments() {
         return $this->hasMany(Comment::class);
+    }
+
+    public function photos() {
+        return $this->hasMany(Photo::class);
     }
 }

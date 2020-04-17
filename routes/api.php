@@ -46,14 +46,17 @@ Route::group(['middleware' => ['role:admin|chef|reader', 'api']], function () {
     Route::post('/comment/{recipe}', 'CommentController@store');
     Route::get('/towns', 'TownController@index');
     Route::get('/category', 'CategoryController@index');
+    Route::post('/photo/{recipe}', 'PhotoController@store');
+    Route::delete('/photo/{recipe}', 'PhotoController@destroy');
+    Route::post('/comments/restaurant/{restaurant}', 'CommentController@storeRest');
+    Route::post('/search', 'SearchController');
 });
 
 Route::group(['middleware' => ['role:admin', 'api']], function () {
     Route::get('/users', 'UserController@index');
     Route::post('/users', 'UserController@store');
     Route::get('/comments', 'CommentController@index');
-    Route::post('/comments/recipe/{recipe}', 'CommentController@store');
-    Route::post('/comments/restaurant/{restaurant}', 'CommentController@storeRest');
+    Route::post('/comments/recipe/{recipe}', 'CommentController@store'); 
 });
 
 Route::group(['middleware' => ['role:admin', 'api']], function () {

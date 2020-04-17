@@ -22,7 +22,7 @@ class RecipeController extends Controller
     public function index()
     {
         $recipes = Recipe::with([
-            'comments', 'category'
+            'comments', 'category', 'photos'
         ])->get();
 
         return response()->json($recipes, 200);
