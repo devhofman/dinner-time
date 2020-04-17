@@ -4,6 +4,7 @@ namespace App;
 
 use App\User;
 use App\Recipe;
+use App\Restaurant;
 use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
@@ -20,6 +21,10 @@ class Comment extends Model
     protected $hidden = [   
         'updated_at'
     ];
+
+    public function restaurants() {
+        return $this->belongsTo(Restaurant::class);
+    }
 
     public function user() {
         return $this->belongsTo(User::class);

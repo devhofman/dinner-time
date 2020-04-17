@@ -28,12 +28,12 @@ class RecipeController extends Controller
         return response()->json($recipes, 200);
     }
 
-    public function getRecipe(Recipe $recipe, $id)
+    public function getRecipe(Recipe $recipe)
     {
-        $recipe = Recipe::find($id)->user()->get();
+        $recipe = Recipe::find($recipe->id)->user()->get();
 
         return response()->json($recipe, 200);
-    }
+    } 
 
     /**
      * Store a newly created resource in storage.

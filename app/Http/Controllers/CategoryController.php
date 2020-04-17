@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Recipe;
+use App\Restaurant;
 
 class CategoryController extends Controller
 {
@@ -21,7 +22,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $category = Category::with('recipes')->get();
+        $category = Category::with(['recipes', 'restaurants'])->get();
 
         return response($category, 200);
     }
@@ -34,20 +35,15 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $data = $request->validate([
+            'name' => 'required'
+        ]);
 
+        $category = new Category;
+        $category->name = $request->name;
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        $category->save();
+        return response($category, 200);
     }
 
     /**
@@ -56,8 +52,10 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        //
+         $category->delete();
+
+         return response('Category item has been deleted', 200);
     }
 }

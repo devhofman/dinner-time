@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
+
 Route::group([
 
     'middleware' => 'api',
@@ -25,6 +26,8 @@ Route::group([
     Route::post('/login', 'LoginController');
     Route::post('/logout', 'LogoutController');
 
+    Route::get('/me', 'MeController');
+    Route::get('/role/{roleName}', 'RolesController');
 });
 
 Route::group([
@@ -38,21 +41,31 @@ Route::group([
 });
 
 Route::group(['middleware' => ['role:admin|chef|reader', 'api']], function () {
+    Route::get('/restaurant', 'RestaurantController@index');
     Route::get('/recipes', 'RecipeController@index');
-    Route::post('/comment/new/{recipe}', 'CommentController@store');
+    Route::post('/comment/{recipe}', 'CommentController@store');
+    Route::get('/towns', 'TownController@index');
+    Route::get('/category', 'CategoryController@index');
 });
 
 Route::group(['middleware' => ['role:admin', 'api']], function () {
     Route::get('/users', 'UserController@index');
-    Route::post('/users/create', 'UserController@store');
+    Route::post('/users', 'UserController@store');
     Route::get('/comments', 'CommentController@index');
+    Route::post('/comments/recipe/{recipe}', 'CommentController@store');
+    Route::post('/comments/restaurant/{restaurant}', 'CommentController@storeRest');
 });
 
 Route::group(['middleware' => ['role:admin', 'api']], function () {
-    Route::post('/recipes/store', 'RecipeController@store');
+    Route::post('/recipes', 'RecipeController@store');
+    Route::post('/town', 'TownController@store');
+    Route::post('/category', 'CategoryController@store');
+    Route::delete('/category/{category}', 'CategoryController@destroy');
+    Route::delete('/town/{town}', 'TownController@destroy');
 });
 
 Route::group(['middleware' => ['role:admin|chef', 'api']], function () {
+    Route::post('/restaurant/{town}/{category}', 'RestaurantController@store');
     Route::delete('/recipes/delete/{recipe}', 'RecipeController@destroy');
 });
 
@@ -69,9 +82,3 @@ Route::group(['middleware' => ['role:admin|chef', 'api']], function () {
 // 
 
 //USERS
-
-
-Route::get('/category', 'CategoryController@index');
-Route::post('/category/add', 'CategoryController@store');
-
-

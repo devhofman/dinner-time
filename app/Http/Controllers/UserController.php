@@ -23,7 +23,7 @@ class UserController extends Controller
     public function index() 
     {    
         $users = User::with([
-            'recipes', 'comments'
+            'recipes', 'comments', 'restaurants'
         ])->get();
         return response()->json($users, 200);
     }

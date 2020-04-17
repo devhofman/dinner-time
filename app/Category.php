@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Restaurant;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
@@ -20,6 +21,6 @@ class Category extends Model
     }
 
     public function restaurants() {
-        return $this->hasMany('App\Resturant', 'category', 'id');
+        return $this->hasMany('App\Restaurant', 'category', 'id');
     }
 }

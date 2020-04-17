@@ -12,19 +12,18 @@ class TownController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+    public function __construct() 
     {
-        //
+        $this->middleware(['auth:api']);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+
+    public function index()
     {
-        //
+        $towns = Town::with('restaurants')->get();
+
+        return response($towns, 200);
     }
 
     /**
@@ -35,30 +34,26 @@ class TownController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => 'string|required',
+            'description' => 'string|required',
+            'longitude' => 'required',
+            'latitude' => 'required',
+            'zoom' => 'required',
+        ]);
+
+        $town = new Town();
+        $town->name = $request->name;
+        $town->description = $request->description;
+        $town->longitude = $request->longitude;
+        $town->latitude = $request->latitude;
+        $town->zoom = $request->zoom;
+        $town->save();
+
+        return response($town, 200);
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Town  $town
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Town $town)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Town  $town
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Town $town)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -80,6 +75,8 @@ class TownController extends Controller
      */
     public function destroy(Town $town)
     {
-        //
+        $town->delete();
+
+        return response('Town has been deleted', 200);
     }
 }

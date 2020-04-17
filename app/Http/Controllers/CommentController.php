@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Comment;
 use App\Recipe;
+use App\Restaurant;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -26,6 +27,24 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function storeRest(Request $request, Restaurant $restaurant)
+    {
+        $data = $request->validate([
+            'title' => 'required',
+            'content' => 'required'
+        ]);
+
+        $comment = new Comment();
+        $comment->title = $request->title;
+        $comment->content = $request->content;
+        $comment->user_id = auth()->user()->id;
+        $comment->restaurant_id = $restaurant->id;
+        $comment->save();
+
+
+        return response($comment, 200);
+    }
+
     public function store(Request $request, Recipe $recipe)
     {
         $data = $request->validate([
@@ -42,18 +61,6 @@ class CommentController extends Controller
 
 
         return response($comment, 200);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Comment  $comment
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Comment $comment)
-    {
-        //
     }
 
     /**
