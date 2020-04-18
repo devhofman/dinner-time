@@ -27,12 +27,12 @@ class Recipe extends Model
         'updated_at'
     ];
 
-    public function user() {
-        return $this->belongsTo(User::class);
+    public function users() {
+        return $this->belongsTo(User::class , 'id');
     }
 
     public function category() {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class, 'id');
     }
 
     public function comments() {

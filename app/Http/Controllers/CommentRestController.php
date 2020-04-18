@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Comment;
-use App\Recipe;
-use App\Restaurant;
+use App\CommentRest;
 use Illuminate\Http\Request;
 
-class CommentController extends Controller
+class CommentRestController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,13 +14,18 @@ class CommentController extends Controller
      */
     public function index()
     {
-        $comment = Comment::with('recipes', 'user')->get();
+        $comment = Comment::with('restaurants')->get();
 
         return response($comment, 200);
     }
 
-
-    public function store(Request $request, Recipe $recipe)
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request, Restaurant $restaurant)
     {
         $data = $request->validate([
             'title' => 'required',
@@ -33,7 +36,7 @@ class CommentController extends Controller
         $comment->title = $request->title;
         $comment->content = $request->content;
         $comment->user_id = auth()->user()->id;
-        $comment->recipe_id = $recipe->id;
+        $comment->restaurant_id = $restaurant->id;
         $comment->save();
 
 
@@ -43,12 +46,12 @@ class CommentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Comment  $comment
+     * @param  \App\CommentRest  $commentRest
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Comment $comment)
+    public function destroy(CommentRest $commentRest)
     {
-        $comment->delete();
+        $commentRest->delete();
 
         return response('Comment has been deleted', 200);
     }

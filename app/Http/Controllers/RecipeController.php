@@ -22,7 +22,7 @@ class RecipeController extends Controller
     public function index()
     {
         $recipes = Recipe::with([
-            'comments', 'category', 'photos'
+            'users', 'comments', 'category', 'photos'
         ])->get();
 
         return response()->json($recipes, 200);
@@ -41,22 +41,38 @@ class RecipeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Category $category)
     {
         $recipe = $request->validate([
             'title' => 'string|max:30|required',
             'about' => 'string|required',
-            'category' => 'string|required',
+            'cover_image' => 'image|nullable|max:1999',
             'ingredients' => 'string|required',
             'how_prepare' => 'string|required',
             'time_prepare' => 'string|required'
         ]);
 
+        if($request->hasFile('cover_image')){
+            
+            $filenameWithExt = $request->file('cover_image')->getClientOriginalName();
+           
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            
+            $extension = $request->file('cover_image')->getClientOriginalExtension();
+           
+            $fileNameToStore= $filename.'_'.time().'.'.$extension;
+            
+            $path = $request->file('cover_image')->storeAs('public/cover_images', $fileNameToStore);
+        } else {
+            $fileNameToStore = 'noimage.jpg';
+        }
+
         $recipe = new Recipe;
         $recipe->title = $request->title;
         $recipe->user_id = auth()->user()->id;
         $recipe->about = $request->about;
-        $recipe->category = $request->category;
+        $recipe->cover_image = $fileNameToStore;
+        $recipe->category = $category->id;
         $recipe->ingredients = $request->ingredients;
         $recipe->how_prepare = $request->how_prepare;
         $recipe->time_prepare = $request->time_prepare;

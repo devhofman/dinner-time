@@ -28,14 +28,14 @@ class Restaurant extends Model
     }
 
     public function category() {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class, 'id');
     }
 
     public function towns() {
-        return $this->belongsTo(Town::class);
+        return $this->belongsTo(Town::class, 'id');
     }
 
     public function users() {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'id');
     }
 }

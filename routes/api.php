@@ -27,17 +27,7 @@ Route::group([
     Route::post('/logout', 'LogoutController');
 
     Route::get('/me', 'MeController');
-    Route::get('/role/{roleName}', 'RolesController');
-});
-
-Route::group([
-
-    'middleware' => 'api',
-
-], function ($router) {
-
-    Route::post('/recipes/store', 'RecipeController@store');
-
+    // Route::get('/role/{roleName}', 'RolesController');
 });
 
 Route::group(['middleware' => ['role:admin|chef|reader', 'api']], function () {
@@ -48,7 +38,8 @@ Route::group(['middleware' => ['role:admin|chef|reader', 'api']], function () {
     Route::get('/category', 'CategoryController@index');
     Route::post('/photo/{recipe}', 'PhotoController@store');
     Route::delete('/photo/{recipe}', 'PhotoController@destroy');
-    Route::post('/comments/restaurant/{restaurant}', 'CommentController@storeRest');
+    Route::post('/comments/restaurant/{restaurant}', 'CommentRestController@store');
+    Route::delete('/comments/restaurant/{restaurant}', 'CommentRestController@destroy');
     Route::post('/search', 'SearchController');
 });
 
@@ -65,23 +56,11 @@ Route::group(['middleware' => ['role:admin', 'api']], function () {
     Route::post('/category', 'CategoryController@store');
     Route::delete('/category/{category}', 'CategoryController@destroy');
     Route::delete('/town/{town}', 'TownController@destroy');
+    Route::get('/roles', 'RolesController@index');
 });
 
 Route::group(['middleware' => ['role:admin|chef', 'api']], function () {
+    Route::post('/recipes/{category}', 'RecipeController@store');
     Route::post('/restaurant/{town}/{category}', 'RestaurantController@store');
     Route::delete('/recipes/delete/{recipe}', 'RecipeController@destroy');
 });
-
-
-// Route::get('/users/{id}/recipes', 'UserController@showRecipe');
-
-// //RECIPES
-// Route::get('/recipes', 'RecipeController@index');
-// Route::get('/recipes/{id}', 'RecipeController@showRecipeOf');
-// Route::post('/recipes/store', 'RecipeController@store');
-
-
-// //COMMENTS
-// 
-
-//USERS

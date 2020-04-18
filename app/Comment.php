@@ -22,15 +22,11 @@ class Comment extends Model
         'updated_at'
     ];
 
-    public function restaurants() {
-        return $this->belongsTo(Restaurant::class);
-    }
-
     public function user() {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'id');
     }
 
     public function recipes() {
-        return $this->belongsTo(Recipe::class);
+        return $this->belongsTo(Recipe::class, 'id');
     }
 }

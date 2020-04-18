@@ -17,7 +17,7 @@ class RestaurantController extends Controller
     public function index()
     {
         $restaurants = Restaurant::with([
-            'towns', 'category', 'comments'
+            'towns', 'category', 'comments', 'users'
         ])->get();
 
         return response($restaurants, 200);

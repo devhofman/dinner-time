@@ -22,7 +22,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $category = Category::with(['recipes', 'restaurants'])->get();
+        $category = Category::with([
+            'recipes', 'restaurants'
+        ])->get();
 
         return response($category, 200);
     }

@@ -17,10 +17,10 @@ class Category extends Model
     ];
 
     public function recipes() {
-        return $this->hasMany('App\Recipe', 'category', 'id');
+        return $this->hasMany('App\Recipe');
     }
 
     public function restaurants() {
-        return $this->hasMany('App\Restaurant', 'category', 'id');
+        return $this->hasMany('App\Restaurant');
     }
 }
