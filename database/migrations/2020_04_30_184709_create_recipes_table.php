@@ -19,7 +19,7 @@ class CreateRecipesTable extends Migration
             $table->string('cover_image');
             $table->integer('user_id');
             $table->string('about');
-            $table->string('category');
+            $table->integer('category_id');
             $table->string('ingredients');
             $table->string('how_prepare');
             $table->integer('time_prepare');

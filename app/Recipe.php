@@ -11,12 +11,15 @@ use Illuminate\Database\Eloquent\Model;
 class Recipe extends Model
 {
     protected $table = 'recipes';
+
+    protected $primaryKey = 'category_id';
+
     protected $fillable = [
         'title',
         'user_id',
         'recipe_id',
         'about',
-        'category',
+        'category_id',
         'ingredients',
         'how_prepare',
         'time_prepare'
@@ -32,7 +35,7 @@ class Recipe extends Model
     }
 
     public function category() {
-        return $this->belongsTo(Category::class, 'id');
+        return $this->belongsTo(Category::class, 'category_id');
     }
 
     public function comments() {

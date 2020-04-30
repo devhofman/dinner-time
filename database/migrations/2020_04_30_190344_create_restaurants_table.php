@@ -22,7 +22,7 @@ class CreateRestaurantsTable extends Migration
             $table->float('zoom');
             $table->integer('user_id');
             $table->integer('town_id');
-            $table->integer('category');
+            $table->integer('category_id');
             $table->timestamps();
         });
     }
